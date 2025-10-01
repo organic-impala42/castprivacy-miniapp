@@ -150,7 +150,6 @@ export default function App() {
   
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authToken, setAuthToken] = useState<string | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const addFrame = useAddFrame();
@@ -376,7 +375,6 @@ export default function App() {
       console.log('Quick Auth result:', result);
       
       if (result && result.token) {
-        setAuthToken(result.token);
         setIsAuthenticated(true);
         console.log('Quick Auth authentication successful');
         
@@ -389,7 +387,6 @@ export default function App() {
         // Fallback for development/testing - use demo auth if we have an FID
         if (currentFid) {
           console.log('Falling back to demo authentication for development');
-          setAuthToken(`demo-auth-token-${currentFid}-${Date.now()}`);
           setIsAuthenticated(true);
           alert('Demo authentication activated (Quick Auth not available in this context)');
         } else {
@@ -400,15 +397,14 @@ export default function App() {
       console.error('Authentication error:', error);
       
       // Provide helpful error message based on context
-      if (error.message?.includes('Quick Auth not available')) {
+      if (error instanceof Error && error.message?.includes('Quick Auth not available')) {
         alert('Authentication requires running in Farcaster app context. Using demo mode for development.');
         // Demo fallback for development
         if (currentFid) {
-          setAuthToken(`demo-auth-token-${currentFid}-${Date.now()}`);
           setIsAuthenticated(true);
         }
       } else {
-        alert(`Authentication failed: ${error.message || 'Unknown error'}`);
+        alert(`Authentication failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     } finally {
       setIsAuthenticating(false);
@@ -418,7 +414,6 @@ export default function App() {
   // Function to sign out user
   const handleSignOut = useCallback(() => {
     setIsAuthenticated(false);
-    setAuthToken(null);
     
     // Note: In a production app, you might want to also clear any cached tokens
     // and notify your backend to invalidate the session
@@ -603,7 +598,7 @@ export default function App() {
                       )}
                     </div>
                   ) : (
-                    <div>
+          <div>
                       <div className="font-semibold text-[var(--app-foreground)]">FID: {currentFid}</div>
                       <div className="text-sm text-[var(--app-foreground-muted)]">Loading profile...</div>
                     </div>

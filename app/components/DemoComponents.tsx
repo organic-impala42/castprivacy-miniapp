@@ -16,6 +16,7 @@ import {
   TransactionStatus,
 } from "@coinbase/onchainkit/transaction";
 import { useNotification } from "@coinbase/onchainkit/minikit";
+import Image from "next/image";
 
 type ButtonProps = {
   children: ReactNode;
@@ -647,10 +648,12 @@ export function CastsDetailedView({ setActiveTab, castsData, isLoading, profileD
                           <div className="text-xs text-[var(--app-foreground-muted)] mb-1">Channel</div>
                           <div className="flex flex-col items-center space-y-1">
                             {cast.channel.image_url && (
-                              <img 
+                              <Image 
                                 src={cast.channel.image_url} 
                                 alt={cast.channel.name}
-                                className="w-4 h-4 rounded"
+                                width={16}
+                                height={16}
+                                className="rounded"
                               />
                             )}
                             <span className="text-xs font-medium text-[var(--app-foreground)] break-all">
