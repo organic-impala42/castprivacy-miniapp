@@ -1,4 +1,5 @@
-const ROOT_URL = process.env.NEXT_PUBLIC_APP_URL || '"https://castprivacy-miniapp.vercel.app/
+const ROOT_URL = process.env.NEXT_PUBLIC_APP_URL || '"https://castprivacy-miniapp.vercel.app"';
+
 export const minikitConfig = {
   accountAssociation: {
     // This will be filled in after deployment (step 4-5 in Base docs)
