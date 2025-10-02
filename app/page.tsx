@@ -29,6 +29,7 @@ import { CastsOverview } from "./components/DemoComponents";
 import { CastsDetailedView } from "./components/DemoComponents";
 import { ReactionsOverview } from "./components/DemoComponents";
 import { ReactionsDetailedView } from "./components/DemoComponents";
+import { LaunchScreen } from "./components/DemoComponents";
 import Image from "next/image";
 
 // Type definition for profile data
@@ -151,6 +152,11 @@ export default function App() {
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  
+  // Mini App flow state
+  const [showLaunchScreen, setShowLaunchScreen] = useState(true);
+  const [miniAppReady, setMiniAppReady] = useState(false);
+  const [isLaunching, setIsLaunching] = useState(false);
 
   const addFrame = useAddFrame();
   const openUrl = useOpenUrl();
@@ -165,6 +171,29 @@ export default function App() {
     console.log('Quick Auth available:', !!(sdk && sdk.quickAuth));
     console.log('MiniKit context:', context);
   }, [setFrameReady, isFrameReady, context]);
+
+  // Initialize Mini App when frame is ready and user launches
+  useEffect(() => {
+    if (isFrameReady && !showLaunchScreen && !miniAppReady) {
+      const initializeMiniApp = async () => {
+        setIsLaunching(true);
+        try {
+          // Tell Farcaster the Mini App is ready
+          await sdk.actions.ready();
+          setMiniAppReady(true);
+          console.log('Mini App fully initialized');
+        } catch (error) {
+          console.error('Mini App initialization failed:', error);
+          // Fallback - still allow app to work
+          setMiniAppReady(true);
+        } finally {
+          setIsLaunching(false);
+        }
+      };
+      
+      initializeMiniApp();
+    }
+  }, [isFrameReady, showLaunchScreen, miniAppReady]);
 
   // Check for FID in context with timeout
   useEffect(() => {
@@ -420,6 +449,13 @@ export default function App() {
     console.log('User signed out');
   }, []);
 
+  // Function to launch the full Mini App
+  const handleLaunchApp = useCallback(() => {
+    if (isFrameReady) {
+      setShowLaunchScreen(false);
+    }
+  }, [isFrameReady]);
+
   // Fetch profile data when FID is available
   useEffect(() => {
     if (currentFid && !profileData) {
@@ -539,22 +575,37 @@ export default function App() {
 
   return (
     <div className="flex flex-col min-h-screen font-sans text-[var(--app-foreground)] mini-app-theme from-[var(--app-background)] to-[var(--app-gray)]">
+      {/* Show Launch Screen or Main App */}
+      {showLaunchScreen ? (
+        <LaunchScreen 
+          onLaunch={handleLaunchApp}
+          isFrameReady={isFrameReady}
+          isLaunching={isLaunching}
+        />
+      ) : !miniAppReady ? (
+        <div className="flex flex-col items-center justify-center min-h-screen p-6">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--app-accent)] mx-auto mb-4"></div>
+            <p className="text-[var(--app-foreground-muted)]">Initializing CastPrivacy...</p>
+          </div>
+        </div>
+      ) : (
       <div className="w-full max-w-md mx-auto px-4 py-3">
         <header className="flex justify-between items-center mb-3 h-11">
-          {/* Authentication Status */}
-          <div className="flex items-center space-x-2">
-            <Icon 
-              name={isAuthenticated ? "unlock" : "lock"} 
-              size="sm" 
-              className={isAuthenticated ? "text-green-600" : "text-red-500"} 
-            />
-            <span className={`text-xs font-medium ${isAuthenticated ? "text-green-600" : "text-red-500"}`}>
-              {isAuthenticated ? "Secure Session" : "Not Authenticated"}
-            </span>
-          </div>
-          
-          <div>{saveFrameButton}</div>
-        </header>
+            {/* Authentication Status */}
+            <div className="flex items-center space-x-2">
+              <Icon 
+                name={isAuthenticated ? "unlock" : "lock"} 
+                size="sm" 
+                className={isAuthenticated ? "text-green-600" : "text-red-500"} 
+              />
+              <span className={`text-xs font-medium ${isAuthenticated ? "text-green-600" : "text-red-500"}`}>
+                {isAuthenticated ? "Secure Session" : "Not Authenticated"}
+              </span>
+            </div>
+            
+            <div>{saveFrameButton}</div>
+          </header>
 
         {/* Profile Information Section */}
         {(currentFid || profileData) && (
@@ -659,6 +710,7 @@ export default function App() {
           </Button>
         </footer>
       </div>
+      )}
     </div>
   );
 }

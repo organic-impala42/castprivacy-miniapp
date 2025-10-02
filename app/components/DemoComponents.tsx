@@ -894,6 +894,67 @@ export function Home({ setActiveTab, isAuthenticated, onAuthenticate, onSignOut,
   );
 }
 
+type LaunchScreenProps = {
+  onLaunch: () => void;
+  isFrameReady: boolean;
+  isLaunching: boolean;
+};
+
+export function LaunchScreen({ onLaunch, isFrameReady, isLaunching }: LaunchScreenProps) {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 animate-fade-in">
+      <div className="text-center max-w-md">
+        {/* Hero Image */}
+        <div className="mb-8">
+          <Image
+            src="/PC_Hero.png"
+            alt="CastPrivacy"
+            width={200}
+            height={200}
+            className="mx-auto rounded-xl shadow-lg"
+          />
+        </div>
+
+        {/* App Title */}
+        <h1 className="text-3xl font-bold text-[var(--app-foreground)] mb-4">
+          CastPrivacy
+        </h1>
+
+        {/* Tagline */}
+        <p className="text-xl text-[var(--app-foreground-muted)] mb-6">
+          Take Control of Your Farcaster Content
+        </p>
+
+        {/* Description */}
+        <p className="text-[var(--app-foreground-muted)] mb-8 leading-relaxed">
+          View, organize, and manage your Farcaster casts and reactions with secure privacy controls.
+        </p>
+
+        {/* Launch Button */}
+        <Button
+          onClick={onLaunch}
+          disabled={!isFrameReady || isLaunching}
+          size="lg"
+          className="w-full h-14 text-lg"
+          icon={isLaunching ? undefined : <Icon name="arrow-right" size="md" />}
+        >
+          {isLaunching ? "Launching CastPrivacy..." : "Launch CastPrivacy"}
+        </Button>
+
+        {/* Status Text */}
+        <p className="text-sm text-[var(--app-foreground-muted)] mt-4">
+          {!isFrameReady 
+            ? "Preparing your secure environment..." 
+            : isLaunching 
+            ? "Initializing privacy controls..."
+            : "Ready to launch"
+          }
+        </p>
+      </div>
+    </div>
+  );
+}
+
 type IconProps = {
   name: "heart" | "star" | "check" | "plus" | "arrow-right" | "lock" | "unlock";
   size?: "sm" | "md" | "lg";
