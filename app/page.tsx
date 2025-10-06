@@ -574,7 +574,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen font-sans text-[var(--app-foreground)] mini-app-theme from-[var(--app-background)] to-[var(--app-gray)]">
+    <div className="flex flex-col min-h-screen font-mono text-[#ffffff] bg-[#1a1a1a]" style={{ imageRendering: 'pixelated' }}>
       {/* Show Launch Screen or Main App */}
       {showLaunchScreen ? (
         <LaunchScreen 
@@ -585,22 +585,22 @@ export default function App() {
       ) : !miniAppReady ? (
         <div className="flex flex-col items-center justify-center min-h-screen p-6">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--app-accent)] mx-auto mb-4"></div>
-            <p className="text-[var(--app-foreground-muted)]">Initializing CastPrivacy...</p>
+            <div className="w-12 h-12 border-2 border-[#00ff00] border-t-transparent animate-spin mx-auto mb-4"></div>
+            <p className="text-[#808080] font-mono">INITIALIZING CASTPRIVACY...</p>
           </div>
         </div>
       ) : (
-      <div className="w-full max-w-md mx-auto px-4 py-3">
-        <header className="flex justify-between items-center mb-3 h-11">
+        <div className="w-full max-w-md mx-auto px-4 py-3">
+          <header className="flex justify-between items-center mb-3 h-11 border-b-2 border-[#808080] pb-2">
             {/* Authentication Status */}
             <div className="flex items-center space-x-2">
               <Icon 
                 name={isAuthenticated ? "unlock" : "lock"} 
                 size="sm" 
-                className={isAuthenticated ? "text-green-600" : "text-red-500"} 
+                className=""
               />
-              <span className={`text-xs font-medium ${isAuthenticated ? "text-green-600" : "text-red-500"}`}>
-                {isAuthenticated ? "Secure Session" : "Not Authenticated"}
+              <span className={`text-xs font-mono uppercase tracking-wider ${isAuthenticated ? "text-[#00ff00]" : "text-[#ff0040]"}`}>
+                {isAuthenticated ? "SECURE" : "UNSECURE"}
               </span>
             </div>
             
