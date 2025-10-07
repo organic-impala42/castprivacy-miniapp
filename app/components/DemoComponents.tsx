@@ -97,22 +97,16 @@ function Card({
 
   const variantStyles = {
     default: {
-      border: "border-[#808080] hover:border-[#00ff00]",
-      headerBg: "bg-[#1a1a1a]",
-      headerText: "text-[#00ff00]",
-      hoverBg: "hover:bg-[#404040]"
+      containerClass: "nes-container is-dark with-title theme-default",
+      titleClass: "title text-[#00ff00]"
     },
     info: {
-      border: "border-[#808080] hover:border-[#0080ff]",
-      headerBg: "bg-[#001a33]",
-      headerText: "text-[#0080ff]",
-      hoverBg: "hover:bg-[#003366]"
+      containerClass: "nes-container is-dark with-title theme-info",
+      titleClass: "title text-[#0080ff]"
     },
     security: {
-      border: "border-[#808080] hover:border-[#ff0040]",
-      headerBg: "bg-[#330010]",
-      headerText: "text-[#ff0040]",
-      hoverBg: "hover:bg-[#660020]"
+      containerClass: "nes-container is-dark with-title theme-security", 
+      titleClass: "title text-[#ff0040]"
     }
   };
 
@@ -120,21 +114,19 @@ function Card({
 
   return (
     <div
-      className={`bg-[#2d2d2d] border-2 ${styles.border} font-mono overflow-hidden transition-all ${className} ${onClick ? `cursor-pointer ${styles.hoverBg}` : ""}`}
+      className={`${styles.containerClass} ${className} ${onClick ? "hover:shadow-lg transition-shadow" : ""}`}
       onClick={onClick}
       onKeyDown={onClick ? handleKeyDown : undefined}
       tabIndex={onClick ? 0 : undefined}
       role={onClick ? "button" : undefined}
-      style={{ imageRendering: 'pixelated' }}
+      style={{ imageRendering: 'pixelated', cursor: 'default' }}
     >
       {title && (
-        <div className={`px-4 py-3 border-b-2 border-[#808080] ${styles.headerBg}`}>
-          <h3 className={`text-base font-mono ${styles.headerText} uppercase tracking-wider`}>
+        <p className={styles.titleClass}>
             {title}
-          </h3>
-        </div>
+        </p>
       )}
-      <div className="p-4 text-[#ffffff]">{children}</div>
+      <div className="text-[#ffffff]">{children}</div>
     </div>
   );
 }
@@ -246,9 +238,9 @@ export function Features({ setActiveTab }: FeaturesProps) {
             </span>
           </li>
         </ul>
-        <Button variant="outline" onClick={() => setActiveTab("home")}>
-          Back to Home
-        </Button>
+        <button className="nes-btn" onClick={() => setActiveTab("home")}>
+          ◀ BACK TO HOME
+        </button>
       </Card>
     </div>
   );
@@ -282,9 +274,9 @@ export function About({ setActiveTab }: AboutProps) {
             </ul>
           </div>
         </div>
-        <Button variant="outline" onClick={() => setActiveTab("home")}>
-          Back to Home
-        </Button>
+        <button className="nes-btn" onClick={() => setActiveTab("home")}>
+          ◀ BACK TO HOME
+        </button>
       </Card>
     </div>
   );
@@ -442,9 +434,9 @@ export function ReactionsOverview({ setActiveTab, reactionsData, profileData, st
     <div className="flex flex-col min-h-screen animate-fade-in">
       <Card title="Reactions Overview">
         <div className="mb-6">
-          <Button variant="outline" onClick={() => setActiveTab("home")}>
-            Back to Home
-          </Button>
+          <button className="nes-btn" onClick={() => setActiveTab("home")}>
+            ◀ BACK TO HOME
+          </button>
         </div>
 
         {/* Storage Usage Section */}
@@ -488,35 +480,32 @@ export function ReactionsOverview({ setActiveTab, reactionsData, profileData, st
 
         {/* Main action buttons */}
         <div className="space-y-4 mb-auto">
-          <Button
+          <button
+            className="nes-btn is-success w-full h-16 text-lg"
             onClick={() => setActiveTab("reactions-detailed")}
-            className="w-full h-16 text-lg"
-            icon={<Icon name="heart" size="md" />}
           >
-            View All Reactions
-          </Button>
+            VIEW ALL REACTIONS ♥
+          </button>
 
-          <Button
-            variant="secondary"
+          <button
+            className="nes-btn w-full h-16 text-lg"
             onClick={handleDownloadAll}
-            className="w-full h-16 text-lg"
             disabled={reactionsData.length === 0}
           >
-            Download All Reactions
-          </Button>
+            DOWNLOAD ALL REACTIONS
+          </button>
         </div>
       </Card>
 
       {/* Delete All button at bottom */}
       <div className="mt-auto pt-6">
-        <Button
-          variant="outline"
+        <button
+          className="nes-btn is-error w-full h-16 text-lg"
           onClick={handleDeleteAll}
-          className="w-full h-16 text-lg border-red-500 text-red-500 hover:bg-red-50 hover:border-red-600 hover:text-red-600"
           disabled={reactionsData.length === 0}
         >
-          Delete All Reactions
-        </Button>
+          DELETE ALL REACTIONS
+        </button>
       </div>
     </div>
   );
@@ -553,9 +542,9 @@ export function CastsOverview({ setActiveTab, castsData, profileData, storageUsa
     <div className="flex flex-col min-h-screen animate-fade-in">
       <Card title="Casts Overview">
         <div className="mb-6">
-          <Button variant="outline" onClick={() => setActiveTab("home")}>
-            Back to Home
-          </Button>
+          <button className="nes-btn" onClick={() => setActiveTab("home")}>
+            ◀ BACK TO HOME
+          </button>
         </div>
 
         {/* Storage Usage Section */}
@@ -599,35 +588,32 @@ export function CastsOverview({ setActiveTab, castsData, profileData, storageUsa
 
         {/* Main action buttons */}
         <div className="space-y-4 mb-auto">
-          <Button
+          <button
+            className="nes-btn is-success w-full h-16 text-lg"
             onClick={() => setActiveTab("casts-detailed")}
-            className="w-full h-16 text-lg"
-            icon={<Icon name="arrow-right" size="md" />}
           >
-            View All Casts
-          </Button>
+            VIEW ALL CASTS ▶
+          </button>
 
-          <Button
-            variant="secondary"
+          <button
+            className="nes-btn w-full h-16 text-lg"
             onClick={handleDownloadAll}
-            className="w-full h-16 text-lg"
             disabled={castsData.length === 0}
           >
-            Download All Casts
-          </Button>
+            DOWNLOAD ALL CASTS
+          </button>
         </div>
       </Card>
 
       {/* Delete All button at bottom */}
       <div className="mt-auto pt-6">
-        <Button
-          variant="outline"
+        <button
+          className="nes-btn is-error w-full h-16 text-lg"
           onClick={handleDeleteAll}
-          className="w-full h-16 text-lg border-red-500 text-red-500 hover:bg-red-50 hover:border-red-600 hover:text-red-600"
           disabled={castsData.length === 0}
         >
-          Delete All Casts
-        </Button>
+          DELETE ALL CASTS
+        </button>
       </div>
     </div>
   );
@@ -669,9 +655,9 @@ export function CastsDetailedView({ setActiveTab, castsData, isLoading, profileD
     <div className="space-y-6 animate-fade-in">
       <Card title={`Manage Your Casts`}>
         <div className="mb-6">
-          <Button variant="outline" onClick={() => setActiveTab("casts-overview")}>
-            Back to Overview
-          </Button>
+          <button className="nes-btn" onClick={() => setActiveTab("casts-overview")}>
+            ◀ BACK TO OVERVIEW
+          </button>
         </div>
 
         {isLoading ? (
@@ -828,7 +814,7 @@ export function ReactionsDetailedView({ setActiveTab, reactionsData, isLoading, 
             icon={<Icon name="arrow-right" size="sm" className="rotate-180" />}
           >
             Back
-          </Button>
+        </Button>
         </div>
 
         {isLoading ? (
@@ -920,55 +906,51 @@ export function Home({ setActiveTab, isAuthenticated, onAuthenticate, onSignOut,
   return (
     <div className="space-y-6">
       <Card variant="info" title="DATA ON FARCASTER">
-        <p className="text-[#808080] mb-4 font-mono text-sm">
+        <p className="text-[#808080] mb-4 text-sm card-text">
           HOW FARCASTER CLIENTS, MINIAPPS AND BASE PROCESS AND STORE YOUR PERSONAL DATA.
         </p>
         <div className="flex space-x-3">
-          <CardButton
-            theme="info"
-            onClick={() => setActiveTab("features")}
-            icon={<Icon name="arrow-right" size="sm" />}
+          <button
+            className="nes-btn is-info"
+          onClick={() => setActiveTab("features")}
           >
-            LEARN MORE
-          </CardButton>
-          <CardButton
-            theme="info"
-            variant="outline"
+            LEARN MORE ▶
+          </button>
+          <button
+            className="nes-btn"
             onClick={() => setActiveTab("about")}
           >
             ABOUT
-          </CardButton>
+          </button>
         </div>
       </Card>
 
       <Card variant="default" title="YOUR CASTS">
-        <p className="text-[#808080] mb-4 font-mono text-sm">
+        <p className="text-[#808080] mb-4 text-sm card-text">
           VIEW YOUR RECENT FARCASTER CASTS AND ACTIVITY.
         </p>
-        <CardButton
-          theme="default"
+        <button
+          className="nes-btn is-success"
           onClick={() => setActiveTab("casts-overview")}
-          icon={<Icon name="arrow-right" size="sm" />}
         >
-          VIEW CASTS
-        </CardButton>
+          VIEW CASTS ▶
+        </button>
       </Card>
 
       <Card variant="default" title="YOUR REACTIONS">
-        <p className="text-[#808080] mb-4 font-mono text-sm">
+        <p className="text-[#808080] mb-4 text-sm card-text">
           SEE YOUR RECENT LIKES AND RECASTS ON FARCASTER.
         </p>
-        <CardButton
-          theme="default"
+        <button
+          className="nes-btn is-success"
           onClick={() => setActiveTab("reactions-overview")}
-          icon={<Icon name="heart" size="sm" />}
         >
-          VIEW REACTIONS
-        </CardButton>
+          VIEW REACTIONS ♥
+        </button>
       </Card>
 
       <Card variant="security" title="SECURE AUTHENTICATION">
-        <p className="text-[#808080] mb-4 font-mono text-sm">
+        <p className="text-[#808080] mb-4 text-sm card-text">
           {isAuthenticated 
             ? "YOU'RE AUTHENTICATED FOR SECURE ACTIONS LIKE DELETING CASTS AND REACTIONS." 
             : "AUTHENTICATE TO ENABLE SECURE ACTIONS LIKE DELETING YOUR CONTENT."
@@ -976,23 +958,20 @@ export function Home({ setActiveTab, isAuthenticated, onAuthenticate, onSignOut,
         </p>
         <div className="flex space-x-3">
           {!isAuthenticated ? (
-            <CardButton
-              theme="security"
+            <button
+              className="nes-btn is-error"
               onClick={onAuthenticate}
               disabled={isAuthenticating}
-              icon={<Icon name="lock" size="sm" />}
             >
-              {isAuthenticating ? "AUTHENTICATING..." : "AUTHENTICATE"}
-            </CardButton>
+              {isAuthenticating ? "AUTHENTICATING..." : "AUTHENTICATE 🔒"}
+            </button>
           ) : (
-            <CardButton
-              theme="security"
-              variant="outline"
+            <button
+              className="nes-btn"
               onClick={onSignOut}
-              icon={<Icon name="unlock" size="sm" />}
             >
-              SIGN OUT
-            </CardButton>
+              SIGN OUT 🔓
+            </button>
           )}
         </div>
       </Card>
@@ -1017,36 +996,45 @@ export function LaunchScreen({ onLaunch, isFrameReady, isLaunching }: LaunchScre
             alt="CastPrivacy"
             width={200}
             height={200}
-            className="mx-auto border-2 border-[#00ff00]"
+            className="mx-auto border-2 border-[#0080ff]"
             style={{ imageRendering: 'pixelated' }}
           />
         </div>
 
         {/* App Title */}
-        <h1 className="text-4xl font-mono text-[#00ff00] mb-4 uppercase tracking-widest">
-          CASTPRIVACY
+        <h1 className="text-4xl font-mono text-[#0080ff] mb-4 tracking-widest">
+          CastPrivacy
         </h1>
 
         {/* Tagline */}
-        <p className="text-xl text-[#ffffff] mb-6 uppercase tracking-wide">
-          TAKE CONTROL OF YOUR FARCASTER CONTENT
+        <p className="text-xl text-[#ffffff] mb-6 tracking-wide" style={{ fontFamily: 'Monaco, Menlo, "Ubuntu Mono", monospace', letterSpacing: '1px' }}>
+          Imagining Privacy on Farcaster MiniApps
         </p>
 
         {/* Description */}
-        <p className="text-[#808080] mb-8 leading-relaxed font-mono text-sm">
-          VIEW, ORGANIZE, AND MANAGE YOUR FARCASTER CASTS AND REACTIONS WITH SECURE PRIVACY CONTROLS.
+        <p className="text-[#808080] mb-2 leading-relaxed text-sm card-text">
+          This and other mini-apps are given read access to basic profile information when you click into them. The specific data types that we can read are:
         </p>
+        <ul className="text-[#808080] mb-8 text-sm ml-4 space-y-1 card-text">
+          <li>• Profile Picture</li>
+          <li>• Farcaster User ID</li>
+          <li>• Farcaster Casts</li>
+        </ul>
 
         {/* Launch Button */}
-        <Button
+        <button
           onClick={onLaunch}
           disabled={!isFrameReady || isLaunching}
-          size="lg"
-          className="w-full h-14 text-lg font-mono uppercase tracking-wider"
-          icon={isLaunching ? undefined : <Icon name="arrow-right" size="md" />}
+          className="nes-btn is-primary w-full h-14 text-sm"
+          style={{
+            fontFamily: "'Press Start 2P', cursive",
+            backgroundColor: '#0080ff',
+            borderColor: '#0080ff'
+          }}
         >
-          {isLaunching ? "LAUNCHING..." : "LAUNCH CASTPRIVACY"}
-        </Button>
+          {isLaunching ? "Launching..." : "Launch CastPrivacy"}
+          {!isLaunching && <span className="ml-2">▶</span>}
+        </button>
 
         {/* Status Text */}
         <p className="text-sm text-[#808080] mt-4 font-mono uppercase tracking-wide">

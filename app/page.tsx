@@ -574,7 +574,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen font-mono text-[#ffffff] bg-[#1a1a1a]" style={{ imageRendering: 'pixelated' }}>
+    <div className="flex flex-col min-h-screen text-[#ffffff] bg-[#1a1a1a] pixel-container" style={{ imageRendering: 'pixelated', fontFamily: 'Monaco, Menlo, "Ubuntu Mono", monospace' }}>
       {/* Show Launch Screen or Main App */}
       {showLaunchScreen ? (
         <LaunchScreen 
@@ -590,7 +590,7 @@ export default function App() {
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-md mx-auto px-4 py-3">
+      <div className="w-full max-w-md mx-auto px-4 py-3">
           <header className="flex justify-between items-center mb-3 h-11 border-b-2 border-[#808080] pb-2">
             {/* Authentication Status */}
             <div className="flex items-center space-x-2">

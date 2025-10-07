@@ -17,9 +17,162 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Geist", sans-serif;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-size: 80%;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+/* Apply retro font ONLY to buttons and headings, not body text */
+h1, h2, h3, h4, h5, h6, button.nes-btn {
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Keep card text readable with monospace */
+.card-text, p, span:not(.nes-btn *) {
+  font-family: "Geist", monospace;
+}
+
+/* Enhanced pixelation effects */
+* {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* More aggressive pixelated rendering for the entire app */
+.pixel-container {
+  image-rendering: pixelated;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  text-rendering: geometricPrecision;
+}
+
+/* NES.css Blue Theme Customization */
+.nes-btn.is-primary {
+  background-color: #0080ff !important;
+  border-color: #0080ff !important;
+  cursor: default !important; /* Keep default cursor */
+}
+
+.nes-btn.is-primary:hover {
+  background-color: #0066cc !important;
+  border-color: #0066cc !important;
+  cursor: default !important;
+}
+
+.nes-btn.is-primary:active,
+.nes-btn.is-primary:focus {
+  background-color: #004080 !important;
+  border-color: #004080 !important;
+  cursor: default !important;
+}
+
+/* Info theme (blue) */
+.nes-btn.is-info {
+  background-color: #0080ff !important;
+  border-color: #0080ff !important;
+  cursor: default !important;
+}
+
+.nes-btn.is-info:hover {
+  background-color: #0066cc !important;
+  border-color: #0066cc !important;
+}
+
+/* Security theme (red) */
+.nes-btn.is-error {
+  background-color: #ff0040 !important;
+  border-color: #ff0040 !important;
+  cursor: default !important;
+}
+
+.nes-btn.is-error:hover {
+  background-color: #cc0033 !important;
+  border-color: #cc0033 !important;
+}
+
+/* Default theme (green) - darker for better contrast */
+.nes-btn.is-success {
+  cursor: default !important;
+  background-color: #2d8f2d !important;
+  border-color: #2d8f2d !important;
+  color: #ffffff !important;
+}
+
+.nes-btn.is-success:hover {
+  background-color: #1a6b1a !important;
+  border-color: #1a6b1a !important;
+}
+
+/* Ensure Press Start 2P font applies to NES elements with no cursor changes */
+.nes-btn {
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 10px !important;
+  cursor: default !important;
+  border-width: 4px !important;
+}
+
+/* Keep default cursor for all interactive elements */
+button, a, input, textarea, select, div, p, span, h1, h2, h3, h4, h5, h6 {
+  cursor: default !important;
+}
+
+/* Force default cursor on all elements */
+* {
+  cursor: default !important;
+}
+
+/* Override any hover cursor changes */
+*:hover {
+  cursor: default !important;
+}
+
+/* Specifically target clickable elements */
+[role="button"], [tabindex], .nes-container[onclick] {
+  cursor: default !important;
+}
+
+/* NES.css container customizations */
+.nes-container.is-dark {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+}
+
+.nes-container.is-dark .title {
+  background-color: #2d2d2d !important; /* Match container background - ONLY change this */
+}
+
+/* Theme-specific border colors for containers */
+.nes-container.theme-default {
+  border-color: #2d8f2d !important; /* Match green buttons */
+}
+
+.nes-container.theme-info {
+  border-color: #0080ff !important; /* Match blue buttons */
+}
+
+.nes-container.theme-security {
+  border-color: #ff0040 !important; /* Match red buttons */
+}
+
+/* Hover effects for clickable containers */
+.nes-container:hover {
+  /* Remove transform that might affect borders */
+  transition: none;
+}
+
+.nes-container {
+  margin-bottom: 1.5rem;
+}
+
+/* Make all text a bit more retro */
+.card-text, p, span:not(.nes-btn *) {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.5px !important;
 }
