@@ -98,15 +98,15 @@ function Card({
   const variantStyles = {
     default: {
       containerClass: "nes-container is-dark with-title theme-default",
-      titleClass: "title text-[#00ff00]"
+      titleClass: "title"
     },
     info: {
       containerClass: "nes-container is-dark with-title theme-info",
-      titleClass: "title text-[#0080ff]"
+      titleClass: "title"
     },
     security: {
       containerClass: "nes-container is-dark with-title theme-security", 
-      titleClass: "title text-[#ff0040]"
+      titleClass: "title"
     }
   };
 
@@ -126,7 +126,7 @@ function Card({
             {title}
         </p>
       )}
-      <div className="text-[#ffffff]">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }
@@ -905,9 +905,9 @@ type HomeProps = {
 export function Home({ setActiveTab, isAuthenticated, onAuthenticate, onSignOut, isAuthenticating }: HomeProps) {
   return (
     <div className="space-y-6">
-      <Card variant="info" title="DATA ON FARCASTER">
-        <p className="text-[#808080] mb-4 text-sm card-text">
-          HOW FARCASTER CLIENTS, MINIAPPS AND BASE PROCESS AND STORE YOUR PERSONAL DATA.
+      <Card variant="info" title="Data on Farcaster">
+        <p className="mb-4 text-sm card-text">
+          How Farcaster clients, miniapps and Base process and store your personal data.
         </p>
         <div className="flex space-x-3">
           <button
@@ -925,9 +925,9 @@ export function Home({ setActiveTab, isAuthenticated, onAuthenticate, onSignOut,
         </div>
       </Card>
 
-      <Card variant="default" title="YOUR CASTS">
-        <p className="text-[#808080] mb-4 text-sm card-text">
-          VIEW YOUR RECENT FARCASTER CASTS AND ACTIVITY.
+      <Card variant="default" title="Your Casts">
+        <p className="mb-4 text-sm card-text">
+          View your recent Farcaster casts and activity.
         </p>
         <button
           className="nes-btn is-success"
@@ -937,9 +937,9 @@ export function Home({ setActiveTab, isAuthenticated, onAuthenticate, onSignOut,
         </button>
       </Card>
 
-      <Card variant="default" title="YOUR REACTIONS">
-        <p className="text-[#808080] mb-4 text-sm card-text">
-          SEE YOUR RECENT LIKES AND RECASTS ON FARCASTER.
+      <Card variant="default" title="Your Reactions">
+        <p className="mb-4 text-sm card-text">
+          See your recent likes and recasts on Farcaster.
         </p>
         <button
           className="nes-btn is-success"
@@ -949,11 +949,11 @@ export function Home({ setActiveTab, isAuthenticated, onAuthenticate, onSignOut,
         </button>
       </Card>
 
-      <Card variant="security" title="SECURE AUTHENTICATION">
-        <p className="text-[#808080] mb-4 text-sm card-text">
+      <Card variant="security" title="Secure Authentication">
+        <p className="mb-4 text-sm card-text">
           {isAuthenticated 
-            ? "YOU'RE AUTHENTICATED FOR SECURE ACTIONS LIKE DELETING CASTS AND REACTIONS." 
-            : "AUTHENTICATE TO ENABLE SECURE ACTIONS LIKE DELETING YOUR CONTENT."
+            ? "You're authenticated for secure actions like deleting casts and reactions." 
+            : "Authenticate to enable secure actions like deleting your content."
           }
         </p>
         <div className="flex space-x-3">
@@ -1002,20 +1002,20 @@ export function LaunchScreen({ onLaunch, isFrameReady, isLaunching }: LaunchScre
         </div>
 
         {/* App Title */}
-        <h1 className="text-4xl font-mono text-[#0080ff] mb-4 tracking-widest">
+        <h1 className="text-3xl font-mono text-[#0080ff] mb-3 tracking-wide">
           CastPrivacy
         </h1>
 
         {/* Tagline */}
-        <p className="text-xl text-[#ffffff] mb-6 tracking-wide" style={{ fontFamily: 'Monaco, Menlo, "Ubuntu Mono", monospace', letterSpacing: '1px' }}>
+        <p className="text-lg text-[#cccccc] mb-6 tracking-normal" style={{ fontFamily: 'Monaco, Menlo, "Ubuntu Mono", monospace' }}>
           Imagining Privacy on Farcaster MiniApps
         </p>
 
         {/* Description */}
-        <p className="text-[#808080] mb-2 leading-relaxed text-sm card-text">
+        <p className="text-[#b0b0b0] mb-2 leading-relaxed text-base card-text">
           This and other mini-apps are given read access to basic profile information when you click into them. The specific data types that we can read are:
         </p>
-        <ul className="text-[#808080] mb-8 text-sm ml-4 space-y-1 card-text">
+        <ul className="text-[#b0b0b0] mb-8 text-base ml-4 space-y-1 card-text">
           <li>• Profile Picture</li>
           <li>• Farcaster User ID</li>
           <li>• Farcaster Casts</li>
@@ -1025,19 +1025,20 @@ export function LaunchScreen({ onLaunch, isFrameReady, isLaunching }: LaunchScre
         <button
           onClick={onLaunch}
           disabled={!isFrameReady || isLaunching}
-          className="nes-btn is-primary w-full h-14 text-sm"
+          className="nes-btn is-primary w-full h-16 text-lg"
           style={{
             fontFamily: "'Press Start 2P', cursive",
             backgroundColor: '#0080ff',
-            borderColor: '#0080ff'
+            borderColor: '#0080ff',
+            fontSize: '16px'
           }}
         >
-          {isLaunching ? "Launching..." : "Launch CastPrivacy"}
-          {!isLaunching && <span className="ml-2">▶</span>}
+          {isLaunching ? "LAUNCHING..." : "LAUNCH CASTPRIVACY"}
+          {!isLaunching && <span className="ml-3 text-xl">▶</span>}
         </button>
 
         {/* Status Text */}
-        <p className="text-sm text-[#808080] mt-4 font-mono uppercase tracking-wide">
+        <p className="text-sm text-[#999999] mt-4 font-mono uppercase tracking-wide">
           {!isFrameReady 
             ? "PREPARING SECURE ENVIRONMENT..." 
             : isLaunching 

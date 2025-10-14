@@ -144,6 +144,16 @@ button, a, input, textarea, select, div, p, span, h1, h2, h3, h4, h5, h6 {
 
 .nes-container.is-dark .title {
   background-color: #2d2d2d !important; /* Match container background - ONLY change this */
+  font-size: 18px !important; /* Larger title text */
+  color: #ffffff !important; /* Whiter title text */
+  text-transform: uppercase !important; /* Capitalize titles */
+  font-weight: bold !important; /* Make titles more prominent */
+  padding: 12px 16px !important; /* More padding for presence */
+  margin: 0 !important; /* Remove any margin that might push it down */
+  display: flex !important; /* Use flexbox for centering */
+  align-items: center !important; /* Center vertically */
+  justify-content: flex-start !important; /* Align text to left but centered vertically */
+  line-height: 1 !important; /* Tight line height for better centering */
 }
 
 /* Theme-specific border colors for containers */
@@ -172,7 +182,16 @@ button, a, input, textarea, select, div, p, span, h1, h2, h3, h4, h5, h6 {
 /* Make all text a bit more retro */
 .card-text, p, span:not(.nes-btn *) {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   line-height: 1.5 !important;
-  letter-spacing: 0.5px !important;
+  letter-spacing: 0.2px !important;
+  color: #e0e0e0 !important; /* Whiter text for better contrast */
+  text-transform: none !important; /* Remove any capitalization */
+}
+
+/* Specific styling for card content */
+.nes-container .card-text {
+  color: #e0e0e0 !important;
+  font-size: 12px !important;
+  text-transform: none !important;
 }
