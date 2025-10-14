@@ -142,13 +142,18 @@ button, a, input, textarea, select, div, p, span, h1, h2, h3, h4, h5, h6 {
   color: #ffffff !important;
 }
 
+/* Ensure consistent padding for both title and content */
+.nes-container.is-dark > div:last-child {
+  padding: 16px !important; /* Reduced padding for more natural spacing */
+}
+
 .nes-container.is-dark .title {
   background-color: #2d2d2d !important; /* Match container background - ONLY change this */
   font-size: 18px !important; /* Larger title text */
   color: #ffffff !important; /* Whiter title text */
   text-transform: uppercase !important; /* Capitalize titles */
   font-weight: bold !important; /* Make titles more prominent */
-  padding: 12px 16px !important; /* More padding for presence */
+  padding: 12px 16px !important; /* Reduced padding to match content */
   margin: 0 !important; /* Remove any margin that might push it down */
   display: flex !important; /* Use flexbox for centering */
   align-items: center !important; /* Center vertically */
