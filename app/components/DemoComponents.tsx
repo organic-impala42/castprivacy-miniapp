@@ -211,36 +211,40 @@ type FeaturesProps = {
 export function Features({ setActiveTab }: FeaturesProps) {
   return (
     <div className="space-y-6 animate-fade-in">
-      <Card title="Key Features">
-        <ul className="space-y-3 mb-4">
-          <li className="flex items-start">
-            <Icon name="check" className="text-[var(--app-accent)] mt-1 mr-2" />
-            <span className="text-[var(--app-foreground-muted)]">
-              Minimalistic and beautiful UI design
-            </span>
-          </li>
-          <li className="flex items-start">
-            <Icon name="check" className="text-[var(--app-accent)] mt-1 mr-2" />
-            <span className="text-[var(--app-foreground-muted)]">
-              Responsive layout for all devices
-            </span>
-          </li>
-          <li className="flex items-start">
-            <Icon name="check" className="text-[var(--app-accent)] mt-1 mr-2" />
-            <span className="text-[var(--app-foreground-muted)]">
-              Dark mode support
-            </span>
-          </li>
-          <li className="flex items-start">
-            <Icon name="check" className="text-[var(--app-accent)] mt-1 mr-2" />
-            <span className="text-[var(--app-foreground-muted)]">
-              OnchainKit integration
-            </span>
-          </li>
-        </ul>
-        <button className="nes-btn" onClick={() => setActiveTab("home")}>
-          ◀ BACK TO HOME
-        </button>
+      <Card title="Your data on Farcaster / Base">
+        <div className="space-y-4">
+          <p className="text-sm card-text">
+            <strong>Data Transparency: What You Need to Know</strong>
+          </p>
+          
+          <p className="text-sm card-text text-[#00ff00]">
+            <strong>This app maintains a strict privacy standard: We do not store any of the data you view.</strong>
+          </p>
+          
+          <p className="text-sm card-text">
+            However, it is critical to understand how the broader Farcaster protocol handles your activity:
+          </p>
+
+          <ul className="space-y-3 ml-4">
+            <li className="text-sm card-text">
+              <strong>• Content Storage is Off-Chain:</strong> Your posts (Casts) and reactions are stored on centralized Web2 servers managed by protocol operators, not directly on the blockchain.
+            </li>
+
+            <li className="text-sm card-text">
+              <strong>• Profile Visibility to All Apps:</strong> Any mini app you use can see your Farcaster ID (FID), your chosen username, and your public profile.
+            </li>
+
+            <li className="text-sm card-text">
+              <strong>• Wallet Linking is Permanent:</strong> Connecting your crypto wallet links your Farcaster identity to your public blockchain activity. This connection remains visible across all connected applications.
+            </li>
+          </ul>
+        </div>
+        
+        <div className="mt-6">
+          <button className="nes-btn" onClick={() => setActiveTab("home")}>
+            ◀ BACK TO HOME
+          </button>
+        </div>
       </Card>
     </div>
   );
@@ -712,15 +716,15 @@ export function CastsDetailedView({ setActiveTab, castsData, isLoading, profileD
                         <span className="flex items-center space-x-1">
                           <span>💬</span>
                           <span>{cast.replies?.count || 0}</span>
-                        </span>
+            </span>
                         <span className="flex items-center space-x-1">
                           <span>🔄</span>
                           <span>{cast.reactions?.recasts_count || 0}</span>
-                        </span>
+            </span>
                         <span className="flex items-center space-x-1">
                           <span>❤️</span>
                           <span>{cast.reactions?.likes_count || 0}</span>
-                        </span>
+            </span>
                       </div>
                     </div>
                   </div>
@@ -744,7 +748,7 @@ export function CastsDetailedView({ setActiveTab, castsData, isLoading, profileD
                             )}
                             <span className="text-xs font-medium text-[var(--app-foreground)] break-all">
                               /{cast.channel.name}
-                            </span>
+            </span>
                           </div>
                         </div>
                       ) : (
@@ -974,6 +978,11 @@ export function Home({ setActiveTab, isAuthenticated, onAuthenticate, onSignOut,
             </button>
           )}
         </div>
+        {!isAuthenticated && (
+          <p className="text-xs text-[#999999] mt-3 leading-relaxed">
+            Once you login, the app has the ability to send / delete casts and reactions on your behalf.
+          </p>
+        )}
       </Card>
     </div>
   );

@@ -695,6 +695,9 @@ export default function App() {
                   <WalletDropdownDisconnect />
                 </WalletDropdown>
               </Wallet>
+              <p className="text-xs text-[#999999] mt-3 leading-relaxed">
+                A connected wallet exposes assets/transfers tied to that address—anyone can view these on-chain.
+              </p>
             </div>
           </div>
         )}
